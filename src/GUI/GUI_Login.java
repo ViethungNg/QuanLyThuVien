@@ -13,12 +13,12 @@ import javax.swing.JOptionPane;
  *
  * @author vhung
  */
-public class GUI_Login extends javax.swing.JFrame {
+public class Login extends javax.swing.JFrame {
 
     /**
      * Creates new form Login
      */
-    public GUI_Login() {
+    public Login() {
         initComponents();
     }
 
@@ -123,8 +123,8 @@ public class GUI_Login extends javax.swing.JFrame {
             }
             else if(maThanhVien == 2) {
                 // Nếu người dùng có MaThanhVien là 1, hiển thị form Home
-                
-               // ht.show();
+                haha ht = new haha();
+                ht.show();
                 this.hide(); 
             }
         }
@@ -158,21 +158,20 @@ public class GUI_Login extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(GUI_Login.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Login.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(GUI_Login.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Login.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(GUI_Login.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Login.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(GUI_Login.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Login.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
-        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new GUI_Login().setVisible(true);
+                new Login().setVisible(true);
             }
         });
     }
