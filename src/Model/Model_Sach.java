@@ -8,41 +8,31 @@ package Model;
  *
  * @author vhung
  */
-public class Mode_Sach {
+public class Model_Sach {
     private int maSach;
     private String tieuDe;
     private int maTacGia;
     private int maNhaXuatBan;
-    private int maTheLoai;
-    private String maSoSachChuanQuocTe;
+    private String theLoai;
     private int namXuatBan;
     private int soTrang;
     private String ngonNgu;
-    private int soLuongBanSaoCoSan;
+    private int soLuong;
 
-    @Override
-    public String toString() {
-        return "Sach{" + "maSach=" + maSach + ", tieuDe=" + tieuDe + ", maTacGia=" + maTacGia + ", maNhaXuatBan=" + maNhaXuatBan + ", maTheLoai=" + maTheLoai + ", maSoSachChuanQuocTe=" + maSoSachChuanQuocTe + ", namXuatBan=" + namXuatBan + ", soTrang=" + soTrang + ", ngonNgu=" + ngonNgu + ", soLuongBanSaoCoSan=" + soLuongBanSaoCoSan + '}';
+    public Model_Sach() {
     }
 
-    public Mode_Sach() {
-    }
-
-    // Constructor
-    public Mode_Sach(int maSach, String tieuDe, int maTacGia, int maNhaXuatBan, int maTheLoai, String maSoSachChuanQuocTe, int namXuatBan, int soTrang, String ngonNgu, int soLuongBanSaoCoSan) {
+    public Model_Sach(int maSach, String tieuDe, int maTacGia, int maNhaXuatBan, String theLoai, int namXuatBan, int soTrang, String ngonNgu, int soLuong) {
         this.maSach = maSach;
         this.tieuDe = tieuDe;
         this.maTacGia = maTacGia;
         this.maNhaXuatBan = maNhaXuatBan;
-        this.maTheLoai = maTheLoai;
-        this.maSoSachChuanQuocTe = maSoSachChuanQuocTe;
+        this.theLoai = theLoai;
         this.namXuatBan = namXuatBan;
         this.soTrang = soTrang;
         this.ngonNgu = ngonNgu;
-        this.soLuongBanSaoCoSan = soLuongBanSaoCoSan;
+        this.soLuong = soLuong;
     }
-
-    // Getter và setter cho các thuộc tính
 
     public int getMaSach() {
         return maSach;
@@ -76,20 +66,12 @@ public class Mode_Sach {
         this.maNhaXuatBan = maNhaXuatBan;
     }
 
-    public int getMaTheLoai() {
-        return maTheLoai;
+    public String getTheLoai() {
+        return theLoai;
     }
 
-    public void setMaTheLoai(int maTheLoai) {
-        this.maTheLoai = maTheLoai;
-    }
-
-    public String getMaSoSachChuanQuocTe() {
-        return maSoSachChuanQuocTe;
-    }
-
-    public void setMaSoSachChuanQuocTe(String maSoSachChuanQuocTe) {
-        this.maSoSachChuanQuocTe = maSoSachChuanQuocTe;
+    public void setTheLoai(String theLoai) {
+        this.theLoai = theLoai;
     }
 
     public int getNamXuatBan() {
@@ -116,13 +98,23 @@ public class Mode_Sach {
         this.ngonNgu = ngonNgu;
     }
 
-    public int getSoLuongBanSaoCoSan() {
-        return soLuongBanSaoCoSan;
+    public int getSoLuong() {
+        return soLuong;
     }
 
-    public void setSoLuongBanSaoCoSan(int soLuongBanSaoCoSan) {
-        this.soLuongBanSaoCoSan = soLuongBanSaoCoSan;
+    public void setSoLuong(int soLuong) {
+        this.soLuong = soLuong;
     }
+
+    @Override
+    public String toString() {
+        return "Model_Sach{" + "maSach=" + maSach + ", tieuDe=" + tieuDe + ", maTacGia=" + maTacGia + ", maNhaXuatBan=" + maNhaXuatBan + ", theLoai=" + theLoai + ", namXuatBan=" + namXuatBan + ", soTrang=" + soTrang + ", ngonNgu=" + ngonNgu + ", soLuong=" + soLuong + '}';
+    }
+
+    public String getString(int i) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
     
     
 }
