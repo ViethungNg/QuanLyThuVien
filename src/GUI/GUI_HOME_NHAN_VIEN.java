@@ -8,12 +8,12 @@ package GUI;
  *
  * @author vhung
  */
-public class haha extends javax.swing.JFrame {
+public class GUI_HOME_NHAN_VIEN extends javax.swing.JFrame {
 
     /**
-     * Creates new form haha
+     * Creates new form GUI_HOME_NHAN_VIEN
      */
-    public haha() {
+    public GUI_HOME_NHAN_VIEN() {
         initComponents();
     }
 
@@ -59,20 +59,20 @@ public class haha extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(haha.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(GUI_HOME_NHAN_VIEN.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(haha.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(GUI_HOME_NHAN_VIEN.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(haha.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(GUI_HOME_NHAN_VIEN.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(haha.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(GUI_HOME_NHAN_VIEN.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new haha().setVisible(true);
+                new GUI_HOME_NHAN_VIEN().setVisible(true);
             }
         });
     }

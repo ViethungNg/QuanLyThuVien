@@ -123,8 +123,8 @@ public class GUI_Login extends javax.swing.JFrame {
             }
             else if(maThanhVien == 2) {
                 // Nếu người dùng có MaThanhVien là 1, hiển thị form GUI_Home
-                haha ht = new haha();
-                ht.show();
+                GUI_HOME_NHAN_VIEN hvn = new GUI_HOME_NHAN_VIEN();
+                hvn.show();
                 this.hide(); 
             }
         }
