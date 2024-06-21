@@ -7,6 +7,8 @@ package GUI;
  *
  * @author vhung
  */
+import ACT.ACT_NhaXuatBan;
+import ACT.ACT_TacGia;
 import DAO.DAO_TacGia;
 import DAO.DAO_NhaXuatBan;
 import Model.Model_NhaXuatBan;
@@ -71,7 +73,7 @@ public class GUI_Home extends javax.swing.JFrame {
     }
     
     
-    private void loadbangtacgia() {
+    public void loadbangtacgia() {
         
     DefaultTableModel model = new DefaultTableModel() {
         @Override
@@ -91,7 +93,8 @@ public class GUI_Home extends javax.swing.JFrame {
     
     TableHienThiTacGia.setModel(model);
 }
-    private void loadbangnhaxuatban() {
+    
+ public void loadbangnhaxuatban() {
         
     DefaultTableModel model = new DefaultTableModel() {
         @Override
@@ -111,6 +114,7 @@ public class GUI_Home extends javax.swing.JFrame {
     
     TableHienThiNhaXuatBan.setModel(model);
 }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -623,40 +627,14 @@ public class GUI_Home extends javax.swing.JFrame {
     }//GEN-LAST:event_btn_QuanLyTacGiaActionPerformed
 
     private void btn_Them_TacGiaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_Them_TacGiaActionPerformed
-        try {
-        // Giả sử bạn có các JTextField cho các trường dữ liệu tương ứng
-
         String tenTacGia = them_txt_tenTacGia.getText();
         int namSinh = Integer.parseInt(them_txt_namSinh.getText());
         int namMat = Integer.parseInt(them_txt_namMat.getText());
         String quocTich = them_txt_quocTich.getText();
 
-        Model_TacGia tg = new Model_TacGia();
-        tg.setTenTacGia(tenTacGia);
-        tg.setNamSinh(namSinh);
-        tg.setNamMat(namMat);
-        tg.setQuocTich(quocTich);
-
-        DAO_TacGia dao = new DAO_TacGia();
-        boolean isInserted = dao.insertTacGia(tg);
-        
-        // Trả về rỗng
-        them_txt_tenTacGia.setText(""); 
-        them_txt_namSinh.setText(""); 
-        them_txt_namMat.setText(""); 
-        them_txt_quocTich.setText(""); 
-        
-        if (isInserted) {
-            JOptionPane.showMessageDialog(this, "Thêm tác giả thành công!");
-            // Cập nhật lại bảng hiển thị nếu cần thiết
-            loadbangtacgia();
-        } else {
-            JOptionPane.showMessageDialog(this, "Thêm tác giả thất bại!");
-        }
-    } catch (Exception e) {
-        e.printStackTrace();
-        JOptionPane.showMessageDialog(this, "Lỗi: " + e.getMessage());
-    }
+        ACT_TacGia actTacGia = new ACT_TacGia();
+        actTacGia.themTacGia(tenTacGia, namSinh, namMat, quocTich, TableHienThiTacGia, them_txt_tenTacGia, them_txt_namSinh, them_txt_namMat, them_txt_quocTich);
+    
     }//GEN-LAST:event_btn_Them_TacGiaActionPerformed
 
     private void txt_maTacGiaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_maTacGiaActionPerformed
@@ -664,31 +642,8 @@ public class GUI_Home extends javax.swing.JFrame {
     }//GEN-LAST:event_txt_maTacGiaActionPerformed
 
     private void btn_Xoa_TacGiaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_Xoa_TacGiaActionPerformed
-           int selectedRow = TableHienThiTacGia.getSelectedRow();
-
-            if (selectedRow == -1) {
-                JOptionPane.showMessageDialog(this, "Vui lòng chọn một dòng để xóa.", "Thông báo", JOptionPane.WARNING_MESSAGE);
-                return;
-            }
-
-            // Lấy thông tin từ hàng được chọn
-            int maTacGia = (int) TableHienThiTacGia.getValueAt(selectedRow, 0);
-            String tenTacGia = (String) TableHienThiTacGia.getValueAt(selectedRow, 1); // Ví dụ lấy tên tác giả để hiển thị trong hộp thoại xác nhận
-
-            // Hiển thị hộp thoại xác nhận
-            int option = JOptionPane.showConfirmDialog(this, "Bạn có chắc chắn muốn xóa tác giả \"" + tenTacGia + "\" không?", "Xác nhận xóa", JOptionPane.YES_NO_OPTION);
-            if (option == JOptionPane.YES_OPTION) {
-                // Xóa tác giả từ CSDL
-                boolean deleted = DAO.DAO_TacGia.deleteTacGia(maTacGia);
-
-                if (deleted) {
-                    JOptionPane.showMessageDialog(this, "Xóa tác giả thành công.", "Thông báo", JOptionPane.INFORMATION_MESSAGE);
-                    // Cập nhật lại bảng hiển thị sau khi xóa
-                    loadbangtacgia();
-                } else {
-                    JOptionPane.showMessageDialog(this, "Xóa tác giả thất bại.", "Thông báo", JOptionPane.ERROR_MESSAGE);
-                }
-            }
+           ACT.ACT_TacGia actTacGia = new ACT.ACT_TacGia();
+           actTacGia.xoaTacGia(TableHienThiTacGia, this);
     }//GEN-LAST:event_btn_Xoa_TacGiaActionPerformed
 
     private void btn_Reset_TacGiaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_Reset_TacGiaActionPerformed
@@ -707,62 +662,16 @@ public class GUI_Home extends javax.swing.JFrame {
     }//GEN-LAST:event_btn_Reset_TacGiaActionPerformed
 
     private void btn_Sua_TacGiaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_Sua_TacGiaActionPerformed
-            // Lấy dữ liệu từ các JTextField
+           // Lấy dữ liệu từ các JTextField
             int maTacGia = Integer.parseInt(txt_maTacGia.getText());
             String tenTacGia = txt_tenTacGia.getText();
             int namSinh = Integer.parseInt(txt_namSinh.getText());
             int namMat = Integer.parseInt(txt_namMat.getText());
             String quocTich = txt_quocTich.getText();
 
-            // Kiểm tra xem có sự thay đổi so với dữ liệu ban đầu hay không
-            boolean changed_TacGia = checkChanges_TacGia(maTacGia, tenTacGia, namSinh, namMat, quocTich);
-
-            if (!changed_TacGia) {
-                JOptionPane.showMessageDialog(this, "Không có thay đổi cần cập nhật.", "Thông báo", JOptionPane.INFORMATION_MESSAGE);
-                return;
-            }
-
-            // Gọi phương thức update của DAO_TacGia để cập nhật thông tin tác giả
-            boolean updated_TacGia = DAO.DAO_TacGia.updateTacGia( maTacGia, tenTacGia, namSinh, namMat, quocTich);
-            if (updated_TacGia) {
-                // Thông báo cập nhật thành công
-                JOptionPane.showMessageDialog(this, "Đã cập nhật thông tin tác giả thành công.", "Thông báo", JOptionPane.INFORMATION_MESSAGE);
-
-                // Sau khi cập nhật thành công, cập nhật lại bảng hiển thị
-                loadbangtacgia();
-            } else {
-                // Thông báo cập nhật không thành công
-                JOptionPane.showMessageDialog(this, "Có lỗi xảy ra trong quá trình cập nhật thông tin tác giả.", "Lỗi", JOptionPane.ERROR_MESSAGE);
-            }
-        }
-
-        // Phương thức kiểm tra sự thay đổi so với dữ liệu ban đầu
-        private boolean checkChanges_TacGia(int maTacGia, String tenTacGia, int namSinh, int namMat, String quocTich) {
-            // Lấy dữ liệu từ JTable để so sánh
-            int selectedRow = TableHienThiTacGia.getSelectedRow();
-            int maTacGiaInTable = (int) TableHienThiTacGia.getValueAt(selectedRow, 0);
-            String tenTacGiaInTable = (String) TableHienThiTacGia.getValueAt(selectedRow, 1);
-            int namSinhInTable = (int) TableHienThiTacGia.getValueAt(selectedRow, 2);
-            int namMatInTable = (int) TableHienThiTacGia.getValueAt(selectedRow, 3);
-            String quocTichInTable = (String) TableHienThiTacGia.getValueAt(selectedRow, 4);
-
-            txt_maTacGia.setText(""); 
-            txt_tenTacGia.setText(""); 
-            txt_namSinh.setText(""); 
-            txt_namMat.setText(""); 
-            txt_quocTich.setText(""); 
-            // So sánh các giá trị
-            if (maTacGia != maTacGiaInTable ||
-                !tenTacGia.equals(tenTacGiaInTable) ||
-                namSinh != namSinhInTable ||
-                namMat != namMatInTable ||
-                !quocTich.equals(quocTichInTable)) {
-                return true; // Có sự thay đổi
-            }
-
-            return false; // Không có sự thay đổi
-            
-            
+            ACT.ACT_TacGia actTacGia = new ACT.ACT_TacGia();
+            actTacGia.suaTacGia(maTacGia, tenTacGia, namSinh, namMat, quocTich, TableHienThiTacGia, this);
+ 
     }//GEN-LAST:event_btn_Sua_TacGiaActionPerformed
 
     private void btn_Sua_NhaXuatBanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_Sua_NhaXuatBanActionPerformed
@@ -837,40 +746,15 @@ public class GUI_Home extends javax.swing.JFrame {
     }//GEN-LAST:event_btn_Reset_NhaXuatBanActionPerformed
 
     private void btn_Them_NhaXuatBanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_Them_NhaXuatBanActionPerformed
-            try {
-            // Giả sử bạn có các JTextField cho các trường dữ liệu tương ứng
-
+            
             String tenNhaXuatBan= them_txt_tenNhaXuatBan.getText();
             String diaChi = them_txt_diaChi.getText();
             String soDienThoai = them_txt_soDienThoai.getText();
             String Email = them_txt_email.getText();
-
-            Model_NhaXuatBan nxb = new Model_NhaXuatBan();
-            nxb.setTenNhaXuatBan(tenNhaXuatBan);
-            nxb.setDiaChi(diaChi);
-            nxb.setSoDienThoai(soDienThoai);
-            nxb.setEmail(Email);
-
-            DAO_NhaXuatBan dao = new DAO_NhaXuatBan();
-            boolean isInserted = dao.insertNhaXuatBan(nxb);
-
-            // Trả về rỗng
-            them_txt_tenNhaXuatBan.setText(""); 
-            them_txt_diaChi.setText(""); 
-            them_txt_soDienThoai.setText(""); 
-            them_txt_email.setText(""); 
-
-            if (isInserted) {
-                JOptionPane.showMessageDialog(this, "Thêm nhà xuất bản thành công!");
-                // Cập nhật lại bảng hiển thị nếu cần thiết
-                loadbangnhaxuatban();
-            } else {
-                JOptionPane.showMessageDialog(this, "Thêm nhà xuất bản thất bại!");
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-            JOptionPane.showMessageDialog(this, "Lỗi: " + e.getMessage());
-        }
+            
+            ACT_NhaXuatBan actNhaXuatBan = new ACT_NhaXuatBan();
+            actNhaXuatBan.themNhaXuatBan(tenNhaXuatBan, diaChi, soDienThoai, Email, TableHienThiTacGia, them_txt_tenNhaXuatBan, them_txt_diaChi, them_txt_soDienThoai, them_txt_email);
+            loadbangnhaxuatban();
     }//GEN-LAST:event_btn_Them_NhaXuatBanActionPerformed
 
     private void btn_Xoa_NhaXuatBanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_Xoa_NhaXuatBanActionPerformed
