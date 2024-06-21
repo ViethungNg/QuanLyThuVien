@@ -934,26 +934,8 @@ public class GUI_Home extends javax.swing.JFrame {
             String soDienThoai = txt_soDienThoai.getText();
             String email = txt_email.getText();
 
-            // Kiểm tra xem có sự thay đổi so với dữ liệu ban đầu hay không
-            boolean changed = checkChanges_NhaXuatBan(maNhaXuatBan, tenNhaXuatBan, diaChi, soDienThoai, email);
-
-            if (!changed) {
-                JOptionPane.showMessageDialog(this, "Không có thay đổi cần cập nhật.", "Thông báo", JOptionPane.INFORMATION_MESSAGE);
-                return;
-            }
-
-            // Gọi phương thức update của DAO_NhaXuatBan để cập nhật thông tin tác giả
-            boolean updated = DAO.DAO_NhaXuatBan.updateNhaXuatBan( maNhaXuatBan, tenNhaXuatBan, diaChi, soDienThoai, email);
-            if (updated) {
-                // Thông báo cập nhật thành công
-                JOptionPane.showMessageDialog(this, "Đã cập nhật thông tin nhà xuất bản thành công.", "Thông báo", JOptionPane.INFORMATION_MESSAGE);
-
-                // Sau khi cập nhật thành công, cập nhật lại bảng hiển thị
-                loadbangnhaxuatban();
-            } else {
-                // Thông báo cập nhật không thành công
-                JOptionPane.showMessageDialog(this, "Có lỗi xảy ra trong quá trình cập nhật thông tin nhà xuất bản.", "Lỗi", JOptionPane.ERROR_MESSAGE);
-            }
+            ACT.ACT_NhaXuatBan actnhaXuatBan = new ACT.ACT_NhaXuatBan();
+            actnhaXuatBan.suaNhaXuatBan(maNhaXuatBan, tenNhaXuatBan, diaChi, soDienThoai, email, TableHienThiNhaXuatBan, this);
     }//GEN-LAST:event_btn_Sua_NhaXuatBanActionPerformed
         private boolean checkChanges_NhaXuatBan(int maNhaXuatBan, String tenNhaXuatBan, String diaChi, String soDienThoai, String email) {
                     // Lấy dữ liệu từ JTable để so sánh
@@ -1010,31 +992,8 @@ public class GUI_Home extends javax.swing.JFrame {
     }//GEN-LAST:event_btn_Them_NhaXuatBanActionPerformed
 
     private void btn_Xoa_NhaXuatBanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_Xoa_NhaXuatBanActionPerformed
-        int selectedRow = TableHienThiNhaXuatBan.getSelectedRow();
-
-            if (selectedRow == -1) {
-                JOptionPane.showMessageDialog(this, "Vui lòng chọn một dòng để xóa.", "Thông báo", JOptionPane.WARNING_MESSAGE);
-                return;
-            }
-
-            // Lấy thông tin từ hàng được chọn
-            int maNhaXuatBan = (int) TableHienThiNhaXuatBan.getValueAt(selectedRow, 0);
-            String tenNhaXuatBan = (String) TableHienThiNhaXuatBan.getValueAt(selectedRow, 1); // Ví dụ lấy tên tác giả để hiển thị trong hộp thoại xác nhận
-
-            // Hiển thị hộp thoại xác nhận
-            int option = JOptionPane.showConfirmDialog(this, "Bạn có chắc chắn muốn xóa nhà xuất bản \"" + tenNhaXuatBan + "\" không?", "Xác nhận xóa", JOptionPane.YES_NO_OPTION);
-            if (option == JOptionPane.YES_OPTION) {
-                // Xóa nhà xuất bản từ CSDL
-                boolean deleted = DAO.DAO_NhaXuatBan.deleteNhaXuatBan(maNhaXuatBan);
-
-                if (deleted) {
-                    JOptionPane.showMessageDialog(this, "Xóa nhà xuất bản thành công.", "Thông báo", JOptionPane.INFORMATION_MESSAGE);
-                    // Cập nhật lại bảng hiển thị sau khi xóa
-                    loadbangnhaxuatban();
-                } else {
-                    JOptionPane.showMessageDialog(this, "Xóa tác giả thất bại.", "Thông báo", JOptionPane.ERROR_MESSAGE);
-                }
-            }
+        ACT.ACT_NhaXuatBan actNhaXuatBan = new ACT.ACT_NhaXuatBan();
+           actNhaXuatBan.xoaNhaXuatBan(TableHienThiNhaXuatBan, this);
     }//GEN-LAST:event_btn_Xoa_NhaXuatBanActionPerformed
 
     private void txt_maNhaXuatBanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_maNhaXuatBanActionPerformed

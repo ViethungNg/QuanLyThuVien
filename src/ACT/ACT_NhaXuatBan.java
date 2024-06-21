@@ -5,6 +5,7 @@
 package ACT;
 
 import DAO.DAO_NhaXuatBan;
+import GUI.GUI_Home;
 import Model.Model_NhaXuatBan;
 import java.util.List;
 import javax.swing.JOptionPane;
@@ -71,5 +72,80 @@ public class ACT_NhaXuatBan {
             JOptionPane.showMessageDialog(null, "Lỗi: " + e.getMessage());
         }
   }
-}
+  
+  public void suaNhaXuatBan(int maNhaXuatBan, String tenNhaXuatBan, String diaChi, String soDienThoai, String Email, JTable table, GUI_Home guiHome ){
+                  // Kiểm tra xem có sự thay đổi so với dữ liệu ban đầu hay không
+            boolean changed_nhaXuatBan = checkChanges_NhaXuatBan(maNhaXuatBan, tenNhaXuatBan, diaChi, soDienThoai, Email,table);
 
+            if (!changed_nhaXuatBan) {
+                JOptionPane.showMessageDialog(guiHome, "Không có thay đổi cần cập nhật.", "Thông báo", JOptionPane.INFORMATION_MESSAGE);
+                return;
+            }
+
+            // Gọi phương thức update của DAO_NhaXuatBan để cập nhật thông tin tác giả
+            boolean updated_NhaXuatBan = DAO.DAO_NhaXuatBan.updateNhaXuatBan( maNhaXuatBan, tenNhaXuatBan, diaChi, soDienThoai, Email);
+            if (updated_NhaXuatBan) {
+                // Thông báo cập nhật thành công
+                JOptionPane.showMessageDialog(guiHome, "Đã cập nhật thông tin nhà xuất bản thành công.", "Thông báo", JOptionPane.INFORMATION_MESSAGE);
+
+                // Sau khi cập nhật thành công, cập nhật lại bảng hiển thị
+                guiHome.loadbangnhaxuatban();
+            } else {
+                // Thông báo cập nhật không thành công
+                JOptionPane.showMessageDialog(guiHome, "Có lỗi xảy ra trong quá trình cập nhật thông tin nhà xuất bản.", "Lỗi", JOptionPane.ERROR_MESSAGE);
+            }
+    } 
+  
+  private boolean checkChanges_NhaXuatBan(int maNhaXuatBan, String tenNhaXuatBan, String diaChi, String soDienThoai, String email, JTable table) {
+                int selectedRow = table.getSelectedRow();
+                if (selectedRow == -1) {
+                    JOptionPane.showMessageDialog(null, "Vui lòng chọn một dòng để sửa.", "Thông báo", JOptionPane.WARNING_MESSAGE);
+                    return false;
+                }
+
+                int maNhaXuatBanInTable = (int) table.getValueAt(selectedRow, 0);
+                String tenNhaXuatBanInTable = (String) table.getValueAt(selectedRow, 1);
+                String diaChiInTable = (String) table.getValueAt(selectedRow, 2);
+                String soDienThoaiInTable = (String) table.getValueAt(selectedRow, 3);
+                String emailInTable = (String) table.getValueAt(selectedRow, 4);
+
+                // So sánh các giá trị
+                if (maNhaXuatBan != maNhaXuatBanInTable ||
+                    !tenNhaXuatBan.equals(tenNhaXuatBanInTable) ||
+                    diaChi != diaChiInTable ||
+                    soDienThoai != soDienThoaiInTable ||
+                    !email.equals(emailInTable)) {
+                    return true; // Có sự thay đổi
+                }
+
+                return false; // Không có sự thay đổi
+            }
+      
+  public void xoaNhaXuatBan(JTable table, GUI_Home guiHome) {
+            int selectedRow = table.getSelectedRow();
+
+            if (selectedRow == -1) {
+                JOptionPane.showMessageDialog(guiHome, "Vui lòng chọn một dòng để xóa.", "Thông báo", JOptionPane.WARNING_MESSAGE);
+                return;
+            }
+
+            // Lấy thông tin từ hàng được chọn
+            int maNhaXuatBan = (int) table.getValueAt(selectedRow, 0);
+            String tenNhaXuatBan = (String) table.getValueAt(selectedRow, 1); // Ví dụ lấy tên tác giả để hiển thị trong hộp thoại xác nhận
+
+            // Hiển thị hộp thoại xác nhận
+            int option = JOptionPane.showConfirmDialog(guiHome, "Bạn có chắc chắn muốn xóa nhà xuất bản \"" + tenNhaXuatBan + "\" không?", "Xác nhận xóa", JOptionPane.YES_NO_OPTION);
+            if (option == JOptionPane.YES_OPTION) {
+                // Xóa nhà xuất bản từ CSDL
+                boolean deleted = DAO.DAO_NhaXuatBan.deleteNhaXuatBan(maNhaXuatBan);
+
+                if (deleted) {
+                    JOptionPane.showMessageDialog(guiHome, "Xóa nhà xuất bản thành công.", "Thông báo", JOptionPane.INFORMATION_MESSAGE);
+                    // Cập nhật lại bảng hiển thị sau khi xóa
+                    guiHome.loadbangnhaxuatban();
+                } else {
+                    JOptionPane.showMessageDialog(guiHome, "Xóa tác giả thất bại.", "Thông báo", JOptionPane.ERROR_MESSAGE);
+                }
+            }
+        }
+}
