@@ -59,11 +59,13 @@ public class ACT_NhaXuatBan {
             them_txt_diaChi.setText(""); 
             them_txt_soDienThoai.setText(""); 
             them_txt_email.setText(""); 
+            
 
             if (isInserted) {
                 JOptionPane.showMessageDialog(null, "Thêm nhà xuất bản thành công!");
                 // Cập nhật lại bảng hiển thị nếu cần thiết
                 loadbangnhaxuatban(table);
+                
             } else {
                 JOptionPane.showMessageDialog(null, "Thêm nhà xuất bản thất bại!");
             }
@@ -72,55 +74,54 @@ public class ACT_NhaXuatBan {
             JOptionPane.showMessageDialog(null, "Lỗi: " + e.getMessage());
         }
   }
-  
-  public void suaNhaXuatBan(int maNhaXuatBan, String tenNhaXuatBan, String diaChi, String soDienThoai, String Email, JTable table, GUI_Home guiHome ){
-                  // Kiểm tra xem có sự thay đổi so với dữ liệu ban đầu hay không
-            boolean changed_nhaXuatBan = checkChanges_NhaXuatBan(maNhaXuatBan, tenNhaXuatBan, diaChi, soDienThoai, Email,table);
+  public void suaNhaXuatBan(int maNhaXuatBan, String tenNhaXuatBan, String diaChi, String soDienThoai, String email, JTable table, GUI_Home guiHome) {
+    // Kiểm tra xem có sự thay đổi so với dữ liệu ban đầu hay không
+    boolean changed_nhaXuatBan = checkChanges_NhaXuatBan(maNhaXuatBan, tenNhaXuatBan, diaChi, soDienThoai, email, table);
 
-            if (!changed_nhaXuatBan) {
-                JOptionPane.showMessageDialog(guiHome, "Không có thay đổi cần cập nhật.", "Thông báo", JOptionPane.INFORMATION_MESSAGE);
-                return;
-            }
+    if (!changed_nhaXuatBan) {
+        JOptionPane.showMessageDialog(guiHome, "Không có thay đổi cần cập nhật.", "Thông báo", JOptionPane.INFORMATION_MESSAGE);
+        return;
+    }
 
-            // Gọi phương thức update của DAO_NhaXuatBan để cập nhật thông tin tác giả
-            boolean updated_NhaXuatBan = DAO.DAO_NhaXuatBan.updateNhaXuatBan( maNhaXuatBan, tenNhaXuatBan, diaChi, soDienThoai, Email);
-            if (updated_NhaXuatBan) {
-                // Thông báo cập nhật thành công
-                JOptionPane.showMessageDialog(guiHome, "Đã cập nhật thông tin nhà xuất bản thành công.", "Thông báo", JOptionPane.INFORMATION_MESSAGE);
+    // Gọi phương thức update của DAO_NhaXuatBan để cập nhật thông tin nhà xuất bản
+    boolean updated_NhaXuatBan = DAO.DAO_NhaXuatBan.updateNhaXuatBan(maNhaXuatBan, tenNhaXuatBan, diaChi, soDienThoai, email);
+    if (updated_NhaXuatBan) {
+        // Thông báo cập nhật thành công
+        JOptionPane.showMessageDialog(guiHome, "Đã cập nhật thông tin nhà xuất bản thành công.", "Thông báo", JOptionPane.INFORMATION_MESSAGE);
+        
+        // Sau khi cập nhật thành công, cập nhật lại bảng hiển thị
+        guiHome.loadbangnhaxuatban();
+    } else {
+        // Thông báo cập nhật không thành công
+        JOptionPane.showMessageDialog(guiHome, "Có lỗi xảy ra trong quá trình cập nhật thông tin nhà xuất bản.", "Lỗi", JOptionPane.ERROR_MESSAGE);
+    }
+}
 
-                // Sau khi cập nhật thành công, cập nhật lại bảng hiển thị
-                guiHome.loadbangnhaxuatban();
-            } else {
-                // Thông báo cập nhật không thành công
-                JOptionPane.showMessageDialog(guiHome, "Có lỗi xảy ra trong quá trình cập nhật thông tin nhà xuất bản.", "Lỗi", JOptionPane.ERROR_MESSAGE);
-            }
-    } 
-  
-  private boolean checkChanges_NhaXuatBan(int maNhaXuatBan, String tenNhaXuatBan, String diaChi, String soDienThoai, String email, JTable table) {
-                int selectedRow = table.getSelectedRow();
-                if (selectedRow == -1) {
-                    JOptionPane.showMessageDialog(null, "Vui lòng chọn một dòng để sửa.", "Thông báo", JOptionPane.WARNING_MESSAGE);
-                    return false;
-                }
+private boolean checkChanges_NhaXuatBan(int maNhaXuatBan, String tenNhaXuatBan, String diaChi, String soDienThoai, String email, JTable table) {
+    int selectedRow = table.getSelectedRow();
+    if (selectedRow == -1) {
+        JOptionPane.showMessageDialog(null, "Vui lòng chọn một dòng để sửa.", "Thông báo", JOptionPane.WARNING_MESSAGE);
+        return false;
+    }
 
-                int maNhaXuatBanInTable = (int) table.getValueAt(selectedRow, 0);
-                String tenNhaXuatBanInTable = (String) table.getValueAt(selectedRow, 1);
-                String diaChiInTable = (String) table.getValueAt(selectedRow, 2);
-                String soDienThoaiInTable = (String) table.getValueAt(selectedRow, 3);
-                String emailInTable = (String) table.getValueAt(selectedRow, 4);
+    int maNhaXuatBanInTable = (int) table.getValueAt(selectedRow, 0);
+    String tenNhaXuatBanInTable = (String) table.getValueAt(selectedRow, 1);
+    String diaChiInTable = (String) table.getValueAt(selectedRow, 2);
+    String soDienThoaiInTable = (String) table.getValueAt(selectedRow, 3);
+    String emailInTable = (String) table.getValueAt(selectedRow, 4);
 
-                // So sánh các giá trị
-                if (maNhaXuatBan != maNhaXuatBanInTable ||
-                    !tenNhaXuatBan.equals(tenNhaXuatBanInTable) ||
-                    diaChi != diaChiInTable ||
-                    soDienThoai != soDienThoaiInTable ||
-                    !email.equals(emailInTable)) {
-                    return true; // Có sự thay đổi
-                }
+    // So sánh các giá trị
+    if (maNhaXuatBan != maNhaXuatBanInTable ||
+        !tenNhaXuatBan.equals(tenNhaXuatBanInTable) ||
+        !diaChi.equals(diaChiInTable) ||
+        !soDienThoai.equals(soDienThoaiInTable) ||
+        !email.equals(emailInTable)) {
+        return true; // Có sự thay đổi
+    }
 
-                return false; // Không có sự thay đổi
-            }
-      
+    return false; // Không có sự thay đổi
+}
+
   public void xoaNhaXuatBan(JTable table, GUI_Home guiHome) {
             int selectedRow = table.getSelectedRow();
 

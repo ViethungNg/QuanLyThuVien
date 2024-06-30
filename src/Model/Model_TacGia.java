@@ -15,15 +15,9 @@ public class Model_TacGia {
     private int namMat;
     private String quocTich;
 
-     public Model_TacGia() {
+    public Model_TacGia() {
     }
 
-    @Override
-    public String toString() {
-        return "TacGia{" + "maTacGia=" + maTacGia + ", tenTacGia=" + tenTacGia + ", namSinh=" + namSinh + ", namMat=" + namMat + ", quocTich=" + quocTich + '}';
-    }
-    
-    // Constructor
     public Model_TacGia(int maTacGia, String tenTacGia, int namSinh, int namMat, String quocTich) {
         this.maTacGia = maTacGia;
         this.tenTacGia = tenTacGia;
@@ -32,7 +26,10 @@ public class Model_TacGia {
         this.quocTich = quocTich;
     }
 
-    // Getter và setter cho các thuộc tính
+    @Override
+    public String toString() {
+        return "Model_TacGia{" + "maTacGia=" + maTacGia + ", tenTacGia=" + tenTacGia + ", namSinh=" + namSinh + ", namMat=" + namMat + ", quocTich=" + quocTich + '}';
+    }
 
     public int getMaTacGia() {
         return maTacGia;
@@ -74,12 +71,8 @@ public class Model_TacGia {
         this.quocTich = quocTich;
     }
     
-    
-    
-
-    public void maTacGia(String string) {
+    public String getString(int i) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
- 
+    }   
+    
 }
-

@@ -1,10 +1,10 @@
-
-import java.util.Date;
-
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
+package Model;
+
+import java.util.Date;
 
 /**
  *
@@ -13,15 +13,14 @@ import java.util.Date;
 public class Model_Phat {
     private int maPhat;
     private int maThanhVien;
-    private double soTienPhat;
+    private float soTienPhat;
     private String lyDoPhat;
     private Date ngayPhat;
 
     public Model_Phat() {
     }
 
-    // Constructor
-    public Model_Phat(int maPhat, int maThanhVien, double soTienPhat, String lyDoPhat, Date ngayPhat) {
+    public Model_Phat(int maPhat, int maThanhVien, float soTienPhat, String lyDoPhat, Date ngayPhat) {
         this.maPhat = maPhat;
         this.maThanhVien = maThanhVien;
         this.soTienPhat = soTienPhat;
@@ -29,7 +28,10 @@ public class Model_Phat {
         this.ngayPhat = ngayPhat;
     }
 
-    // Getter và setter cho các thuộc tính
+    @Override
+    public String toString() {
+        return "Model_Phat{" + "maPhat=" + maPhat + ", maThanhVien=" + maThanhVien + ", soTienPhat=" + soTienPhat + ", lyDoPhat=" + lyDoPhat + ", ngayPhat=" + ngayPhat + '}';
+    }
 
     public int getMaPhat() {
         return maPhat;
@@ -47,11 +49,11 @@ public class Model_Phat {
         this.maThanhVien = maThanhVien;
     }
 
-    public double getSoTienPhat() {
+    public float getSoTienPhat() {
         return soTienPhat;
     }
 
-    public void setSoTienPhat(double soTienPhat) {
+    public void setSoTienPhat(float soTienPhat) {
         this.soTienPhat = soTienPhat;
     }
 
@@ -71,5 +73,9 @@ public class Model_Phat {
         this.ngayPhat = ngayPhat;
     }
     
+    
+        
+    public String getString(int i) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
 }
-

@@ -18,15 +18,9 @@ public class Model_MuonSach {
     private Date ngayPhaiTra;
     private Date ngayTra;
 
-    @Override
-    public String toString() {
-        return "MuonSach{" + "maMuonSach=" + maMuonSach + ", maThanhVien=" + maThanhVien + ", maSach=" + maSach + ", ngayMuon=" + ngayMuon + ", ngayPhaiTra=" + ngayPhaiTra + ", ngayTra=" + ngayTra + '}';
-    }
-
     public Model_MuonSach() {
     }
 
-    // Constructor
     public Model_MuonSach(int maMuonSach, int maThanhVien, int maSach, Date ngayMuon, Date ngayPhaiTra, Date ngayTra) {
         this.maMuonSach = maMuonSach;
         this.maThanhVien = maThanhVien;
@@ -36,7 +30,10 @@ public class Model_MuonSach {
         this.ngayTra = ngayTra;
     }
 
-    // Getter và setter cho các thuộc tính
+    @Override
+    public String toString() {
+        return "Model_MuonSach{" + "maMuonSach=" + maMuonSach + ", maThanhVien=" + maThanhVien + ", maSach=" + maSach + ", ngayMuon=" + ngayMuon + ", ngayPhaiTra=" + ngayPhaiTra + ", ngayTra=" + ngayTra + '}';
+    }
 
     public int getMaMuonSach() {
         return maMuonSach;
@@ -85,5 +82,10 @@ public class Model_MuonSach {
     public void setNgayTra(Date ngayTra) {
         this.ngayTra = ngayTra;
     }
+
+
     
+    public String getString(int i) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
 }

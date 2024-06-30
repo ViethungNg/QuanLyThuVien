@@ -8,12 +8,12 @@ package GUI;
  *
  * @author vhung
  */
-public class GUI_HOME_NHAN_VIEN extends javax.swing.JFrame {
+public class GUI_Home_NHAN_VIEN extends javax.swing.JFrame {
 
     /**
-     * Creates new form GUI_HOME_NHAN_VIEN
+     * Creates new form GUI_Home_NHAN_VIEN
      */
-    public GUI_HOME_NHAN_VIEN() {
+    public GUI_Home_NHAN_VIEN(String TenTaiKhoan) {
         initComponents();
     }
 
@@ -59,20 +59,21 @@ public class GUI_HOME_NHAN_VIEN extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(GUI_HOME_NHAN_VIEN.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(GUI_Home_NHAN_VIEN.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(GUI_HOME_NHAN_VIEN.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(GUI_Home_NHAN_VIEN.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(GUI_HOME_NHAN_VIEN.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(GUI_Home_NHAN_VIEN.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(GUI_HOME_NHAN_VIEN.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(GUI_Home_NHAN_VIEN.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
+            private String TenTaiKhoan;
             public void run() {
-                new GUI_HOME_NHAN_VIEN().setVisible(true);
+                new GUI_Home_NHAN_VIEN(TenTaiKhoan).setVisible(true);
             }
         });
     }

@@ -66,8 +66,15 @@ public class ACT_TacGia {
             JOptionPane.showMessageDialog(null, "Lỗi: " + e.getMessage());
         }
     }
-    
+        
         public void suaTacGia(int maTacGia, String tenTacGia, int namSinh, int namMat, String quocTich, JTable table, GUI_Home guiHome) {
+            int selectedRow = table.getSelectedRow();
+
+            if (selectedRow == -1) {
+                JOptionPane.showMessageDialog(guiHome, "Vui lòng chọn một dòng để sửa.", "Thông báo", JOptionPane.WARNING_MESSAGE);
+                return;
+            }
+
             // Kiểm tra xem có sự thay đổi so với dữ liệu ban đầu hay không
             boolean changed_TacGia = checkChanges_TacGia(maTacGia, tenTacGia, namSinh, namMat, quocTich, table);
 
@@ -88,33 +95,34 @@ public class ACT_TacGia {
                 // Thông báo cập nhật không thành công
                 JOptionPane.showMessageDialog(guiHome, "Có lỗi xảy ra trong quá trình cập nhật thông tin tác giả.", "Lỗi", JOptionPane.ERROR_MESSAGE);
             }
-        }
-    
-        
-        private boolean checkChanges_TacGia(int maTacGia, String tenTacGia, int namSinh, int namMat, String quocTich, JTable table) {
-                int selectedRow = table.getSelectedRow();
-                if (selectedRow == -1) {
-                    JOptionPane.showMessageDialog(null, "Vui lòng chọn một dòng để sửa.", "Thông báo", JOptionPane.WARNING_MESSAGE);
-                    return false;
-                }
+}
 
-                int maTacGiaInTable = (int) table.getValueAt(selectedRow, 0);
-                String tenTacGiaInTable = (String) table.getValueAt(selectedRow, 1);
-                int namSinhInTable = (int) table.getValueAt(selectedRow, 2);
-                int namMatInTable = (int) table.getValueAt(selectedRow, 3);
-                String quocTichInTable = (String) table.getValueAt(selectedRow, 4);
-
-                // So sánh các giá trị
-                if (maTacGia != maTacGiaInTable ||
-                    !tenTacGia.equals(tenTacGiaInTable) ||
-                    namSinh != namSinhInTable ||
-                    namMat != namMatInTable ||
-                    !quocTich.equals(quocTichInTable)) {
-                    return true; // Có sự thay đổi
-                }
-
-                return false; // Không có sự thay đổi
+private boolean checkChanges_TacGia(int maTacGia, String tenTacGia, int namSinh, int namMat, String quocTich, JTable table) {
+            int selectedRow = table.getSelectedRow();
+            if (selectedRow == -1) {
+                JOptionPane.showMessageDialog(null, "Vui lòng chọn một dòng để sửa.", "Thông báo", JOptionPane.WARNING_MESSAGE);
+                return false;
             }
+
+            int maTacGiaInTable = (int) table.getValueAt(selectedRow, 0);
+            String tenTacGiaInTable = (String) table.getValueAt(selectedRow, 1);
+            int namSinhInTable = (int) table.getValueAt(selectedRow, 2);
+            int namMatInTable = (int) table.getValueAt(selectedRow, 3);
+            String quocTichInTable = (String) table.getValueAt(selectedRow, 4);
+
+            // So sánh các giá trị
+            if (maTacGia != maTacGiaInTable ||
+                !tenTacGia.equals(tenTacGiaInTable) ||
+                namSinh != namSinhInTable ||
+                namMat != namMatInTable ||
+                !quocTich.equals(quocTichInTable)) {
+                return true; // Có sự thay đổi
+            }
+
+            return false; // Không có sự thay đổi
+}
+
+        
         
         public void xoaTacGia(JTable table, GUI_Home guiHome) {
             int selectedRow = table.getSelectedRow();

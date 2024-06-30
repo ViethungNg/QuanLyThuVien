@@ -10,32 +10,31 @@ import java.util.Date;
  *
  * @author vhung
  */
-public class Mode_ThanhVien {
+public class Model_ThanhVien {
     private int maThanhVien;
-    private String hoTen;
+    private String tenThanhVien;
     private Date ngaySinh;
     private String diaChi;
     private String soDienThoai;
     private String email;
     private Date ngayDangKyThanhVien;
 
-    @Override
-    public String toString() {
-        return "ThanhVien{" + "maThanhVien=" + maThanhVien + ", hoTen=" + hoTen + ", ngaySinh=" + ngaySinh + ", diaChi=" + diaChi + ", soDienThoai=" + soDienThoai + ", email=" + email + ", ngayDangKyThanhVien=" + ngayDangKyThanhVien + '}';
+    public Model_ThanhVien() {
     }
 
-    public Mode_ThanhVien() {
-    }
-
-    // Constructor
-    public Mode_ThanhVien(int maThanhVien, String hoTen, Date ngaySinh, String diaChi, String soDienThoai, String email, Date ngayDangKyThanhVien) {
+    public Model_ThanhVien(int maThanhVien, String tenThanhVien, Date ngaySinh, String diaChi, String soDienThoai, String email, Date ngayDangKyThanhVien) {
         this.maThanhVien = maThanhVien;
-        this.hoTen = hoTen;
+        this.tenThanhVien = tenThanhVien;
         this.ngaySinh = ngaySinh;
         this.diaChi = diaChi;
         this.soDienThoai = soDienThoai;
         this.email = email;
         this.ngayDangKyThanhVien = ngayDangKyThanhVien;
+    }
+
+    @Override
+    public String toString() {
+        return "Model_ThanhVien{" + "maThanhVien=" + maThanhVien + ", tenThanhVien=" + tenThanhVien + ", ngaySinh=" + ngaySinh + ", diaChi=" + diaChi + ", soDienThoai=" + soDienThoai + ", email=" + email + ", ngayDangKyThanhVien=" + ngayDangKyThanhVien + '}';
     }
 
     public int getMaThanhVien() {
@@ -46,12 +45,12 @@ public class Mode_ThanhVien {
         this.maThanhVien = maThanhVien;
     }
 
-    public String getHoTen() {
-        return hoTen;
+    public String getTenThanhVien() {
+        return tenThanhVien;
     }
 
-    public void setHoTen(String hoTen) {
-        this.hoTen = hoTen;
+    public void setTenThanhVien(String tenThanhVien) {
+        this.tenThanhVien = tenThanhVien;
     }
 
     public Date getNgaySinh() {
@@ -94,4 +93,9 @@ public class Mode_ThanhVien {
         this.ngayDangKyThanhVien = ngayDangKyThanhVien;
     }
     
+    
+        
+    public String getString(int i) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
 }

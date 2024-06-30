@@ -4,6 +4,7 @@
  */
 package GUI;
 import DAO.DAO_KetNoi;
+import GUI.GUI_Home;
 import java.lang.System.Logger;
 import java.lang.System.Logger.Level;
 import java.sql.*;
@@ -101,7 +102,7 @@ public class GUI_Login extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
+    public String TenTaiKhoan;
     private void btnDangNhapActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDangNhapActionPerformed
         DAO_KetNoi cn = new DAO_KetNoi();
         Connection conn = null;
@@ -109,27 +110,27 @@ public class GUI_Login extends javax.swing.JFrame {
             String username = txtTaiKhoan.getText();
             String password = txtMatKhau.getText();
             conn = cn.getConnection();
-            String sql = "SELECT * FROM TaiKhoan WHERE TenDangNhap = '" +username+"'  AND MatKhau =  '" + password+"'";
+            String sql = "SELECT * FROM NHANVIEN WHERE TenDangNhap = ? AND MatKhau = ?";
             PreparedStatement pst = conn.prepareCall(sql);
+            pst.setString(1, username);
+            pst.setString(2, password);
             ResultSet rs = pst.executeQuery();
             if(rs.next()){
-            // Lấy giá trị MaThanhVien từ kết quả truy vấn
-            int maThanhVien = rs.getInt("MaThanhVien");
-            if(maThanhVien == 1) {
-                // Nếu người dùng có MaThanhVien là 1, hiển thị form GUI_Home
-                GUI_Home home = new GUI_Home();
-                home.show();
-                this.hide(); 
-            }
-            else if(maThanhVien == 2) {
-                // Nếu người dùng có MaThanhVien là 1, hiển thị form GUI_Home
-                GUI_HOME_NHAN_VIEN hvn = new GUI_HOME_NHAN_VIEN();
-                hvn.show();
-                this.hide(); 
-            }
-        }
-
-            else{
+                // Lấy giá trị MaQuyen từ kết quả truy vấn
+                int maQuyen = rs.getInt("MaQuyen");
+                TenTaiKhoan = username; // Lưu trữ tên đăng nhập
+                if(maQuyen == 1) {
+                    // Nếu người dùng có MaQuyen là 1, hiển thị form GUI_Home
+                    GUI_Home home = new GUI_Home(TenTaiKhoan);
+                    home.setVisible(true);
+                    this.setVisible(false); 
+                } else if(maQuyen == 2) {
+                    // Nếu người dùng có MaQuyen là 2, hiển thị form GUI_Home_NHAN_VIEN
+                    GUI_Home_NHAN_VIEN hvn = new GUI_Home_NHAN_VIEN(TenTaiKhoan);
+                    hvn.setVisible(true);
+                    this.setVisible(false); 
+                }
+            } else {
                 JOptionPane.showMessageDialog(this, "Sai thông tin đăng nhập");
             }
         } catch (SQLException ex) {

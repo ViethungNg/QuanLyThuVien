@@ -7,7 +7,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class DAO_KetNoi {
-    static String connurl = "jdbc:sqlserver://VIETHUNG\\SQLEXPRESS:1433;databaseName=QuanLyThuVien;user=sa;password=Viethung1609;encrypt=false;";
+    static String connurl = "jdbc:sqlserver://VIETHUNG\\SQLEXPRESS:1433;databaseName=QuanLyThuVien1;user=sa;password=Viethung1609;encrypt=false;";
     static Connection conn;
 
     // Phương thức mở kết nối và trả về đối tượng Connection

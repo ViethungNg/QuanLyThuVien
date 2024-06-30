@@ -15,15 +15,9 @@ public class Model_NhaXuatBan {
     private String soDienThoai;
     private String email;
 
-    @Override
-    public String toString() {
-        return "NhaXuatBan{" + "maNhaXuatBan=" + maNhaXuatBan + ", tenNhaXuatBan=" + tenNhaXuatBan + ", diaChi=" + diaChi + ", soDienThoai=" + soDienThoai + ", email=" + email + '}';
-    }
-
     public Model_NhaXuatBan() {
     }
-    
-    // Constructor
+
     public Model_NhaXuatBan(int maNhaXuatBan, String tenNhaXuatBan, String diaChi, String soDienThoai, String email) {
         this.maNhaXuatBan = maNhaXuatBan;
         this.tenNhaXuatBan = tenNhaXuatBan;
@@ -32,7 +26,10 @@ public class Model_NhaXuatBan {
         this.email = email;
     }
 
-    // Getter và setter cho các thuộc tính
+    @Override
+    public String toString() {
+        return "Model_NhaXuatBan{" + "maNhaXuatBan=" + maNhaXuatBan + ", tenNhaXuatBan=" + tenNhaXuatBan + ", diaChi=" + diaChi + ", soDienThoai=" + soDienThoai + ", email=" + email + '}';
+    }
 
     public int getMaNhaXuatBan() {
         return maNhaXuatBan;
@@ -75,5 +72,8 @@ public class Model_NhaXuatBan {
     }
     
     
+        
+    public String getString(int i) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
 }
-

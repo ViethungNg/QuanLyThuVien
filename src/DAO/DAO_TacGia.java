@@ -7,6 +7,8 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 
 public class DAO_TacGia {
+
+   
     ArrayList<Model_TacGia> danhsachTacGia = new ArrayList<>();
     DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
 
@@ -72,53 +74,53 @@ public class DAO_TacGia {
                 return result;
 }
 public static boolean updateTacGia(int maTacGia, String tenTacGia, int namSinh, int namMat, String quocTich) {
-    boolean updated = false;
-    Connection conn = null;
-    PreparedStatement ps = null;
+            boolean updated = false;
+            Connection conn = null;
+            PreparedStatement ps = null;
 
-    try {
-        conn = DAO_KetNoi.getConnection();
-        conn.setAutoCommit(false); // Bắt đầu giao dịch
+            try {
+                conn = DAO_KetNoi.getConnection();
+                conn.setAutoCommit(false); // Bắt đầu giao dịch
 
-        String query = "UPDATE TACGIA SET TenTacGia=?, NamSinh=?, NamMat=?, QuocTich=? WHERE MaTacGia=?";
-        ps = conn.prepareStatement(query);
-        ps.setString(1, tenTacGia);
-        ps.setInt(2, namSinh);
-        ps.setInt(3, namMat);
-        ps.setString(4, quocTich);
-        ps.setInt(5, maTacGia); // Đặt tham số MaTacGia
+                String query = "UPDATE TACGIA SET TenTacGia=?, NamSinh=?, NamMat=?, QuocTich=? WHERE MaTacGia=?";
+                ps = conn.prepareStatement(query);
+                ps.setString(1, tenTacGia);
+                ps.setInt(2, namSinh);
+                ps.setInt(3, namMat);
+                ps.setString(4, quocTich);
+                ps.setInt(5, maTacGia); // Đặt tham số MaTacGia
 
-        int rowUpdated = ps.executeUpdate();
-        if (rowUpdated > 0) {
-            updated = true;
-            conn.commit(); // Xác nhận giao dịch thành công
-        } else {
-            conn.rollback(); // Quay lại trạng thái trước khi bắt đầu giao dịch nếu không thành công
-        }
-    } catch (SQLException e) {
-        e.printStackTrace();
-        try {
-            if (conn != null) {
-                conn.rollback(); // Quay lại trạng thái trước khi bắt đầu giao dịch nếu có lỗi
+                int rowUpdated = ps.executeUpdate();
+                if (rowUpdated > 0) {
+                    updated = true;
+                    conn.commit(); // Xác nhận giao dịch thành công
+                } else {
+                    conn.rollback(); // Quay lại trạng thái trước khi bắt đầu giao dịch nếu không thành công
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
+                try {
+                    if (conn != null) {
+                        conn.rollback(); // Quay lại trạng thái trước khi bắt đầu giao dịch nếu có lỗi
+                    }
+                } catch (SQLException ex) {
+                    ex.printStackTrace();
+                }
+            } finally {
+                try {
+                    if (ps != null) {
+                        ps.close();
+                    }
+                    if (conn != null) {
+                        conn.setAutoCommit(true); // Trả lại tự động commit cho kết nối
+                        conn.close();
+                    }
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
             }
-        } catch (SQLException ex) {
-            ex.printStackTrace();
-        }
-    } finally {
-        try {
-            if (ps != null) {
-                ps.close();
-            }
-            if (conn != null) {
-                conn.setAutoCommit(true); // Trả lại tự động commit cho kết nối
-                conn.close();
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-    }
 
-    return updated;
+            return updated;
 }
 
 
