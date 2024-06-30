@@ -126,7 +126,7 @@ private boolean checkChanges_CongViec(int maQuyen, String tenCongViec, JTable ta
                 return;
             }
 
-            // Lấy thông tin từ hàng được chọn
+            // Lấy thông tin từ hàng được chọn.
             int maQuyen = (int) table.getValueAt(selectedRow, 0);
             String tenCongViec = (String) table.getValueAt(selectedRow, 1); // Ví dụ lấy tên công việc để hiển thị trong hộp thoại xác nhận
 
