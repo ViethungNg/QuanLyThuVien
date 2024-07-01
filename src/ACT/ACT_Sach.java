@@ -91,7 +91,7 @@ public class ACT_Sach {
             them_txt_giaThue.setText(""); 
             them_txt_giaBan.setText(""); 
 
-
+//
             if (isInserted) {
                 JOptionPane.showMessageDialog(null, "Thêm sách thành công!");
                 // Cập nhật lại bảng hiển thị nếu cần thiết
@@ -128,7 +128,7 @@ public class ACT_Sach {
                 JOptionPane.showMessageDialog(guiHome, "Có lỗi xảy ra trong quá trình cập nhật thông tin sách.", "Lỗi", JOptionPane.ERROR_MESSAGE);
             }
     } 
-  
+  //
   private boolean checkChanges_Sach(int maSach, String tenSach, int maTacGia, int maNhaXuatBan, String theLoai, int namXuatBan, int soTrang, String ngonNgu, int soLuong, float giaThue, float giaBan, JTable table) {
                 int selectedRow = table.getSelectedRow();
                 if (selectedRow == -1) {
